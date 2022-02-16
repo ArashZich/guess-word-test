@@ -3,14 +3,12 @@ import Enzyme, { shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import Congrats from "../Congrats";
 
+import { findByTestAttr, checkProps } from "../../../test/testUtils";
+
 Enzyme.configure({ adapter: new Adapter() });
 
 const setup = (props = {}) => {
   return shallow(<Congrats {...props} />);
-};
-
-const findByTestAttr = (wrapper, val) => {
-  return wrapper.find(`[data-test="${val}"]`);
 };
 
 test("renders without error", () => {
@@ -31,4 +29,10 @@ test('renders message not congratulations when "success" prop is false', () => {
   const component = findByTestAttr(wrapper, "component-congrats");
 
   expect(component.text()).toBe("");
+});
+
+test("I want to check props type and prevent error", () => {
+  const expectedProps = { success: false };
+
+  checkProps(Congrats, expectedProps);
 });
