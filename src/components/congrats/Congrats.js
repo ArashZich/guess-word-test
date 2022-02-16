@@ -1,7 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Congrats = (props) => {
-  if (props.success) {
+  const { success } = props;
+  if (success) {
     return (
       <div data-test="component-congrats">
         <span data-test="congrats-message">
@@ -12,6 +14,14 @@ const Congrats = (props) => {
   } else {
     return <div data-test="component-congrats"></div>;
   }
+};
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired,
+};
+
+Congrats.defaultProps = {
+  success: false,
 };
 
 export default Congrats;
